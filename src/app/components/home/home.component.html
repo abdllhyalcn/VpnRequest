@@ -1,9 +1,9 @@
 <div class="title">In Home!</div>
 
 <div class="table">
-    <p-table [columns]="cols" [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+    <p-table [columns]="cols" [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
         <ng-template pTemplate="caption">
-            List of Cars
+            Vpn Requests
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
@@ -26,7 +26,7 @@
             </div>
         </ng-template>    
     </p-table>
-    
+    <!--
     <p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
         <div class="ui-g ui-fluid" *ngIf="car">
             <div class="ui-g-12">
@@ -68,6 +68,6 @@
                 <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
             </div>
         </p-footer>
-    </p-dialog>
+    </p-dialog>-->
 </div>
 

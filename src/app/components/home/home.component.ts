@@ -28,10 +28,13 @@ export class HomeComponent implements OnInit {
       this.carService.getCarsSmall().then(cars => this.cars = cars);
 
       this.cols = [
-          { field: 'vin', header: 'Vin' },
-          { field: 'year', header: 'Year' },
-          { field: 'brand', header: 'Brand' },
-          { field: 'color', header: 'Color' }
+          { field: 'Kullanıcı_Adi', header: 'Kullanıcı Adı' },
+          { field: 'Request_ID', header: 'Request ID' },
+          { field: 'Baslangic_Tarihi', header: 'Başlangıç Tarihi' },
+          { field: 'Bitis_Tarihi', header: 'Bitiş Tarihi' },
+          { field: 'Talep_Acan', header: 'Talep Açan' },
+          { field: 'Kullanici', header: 'Kullanıcı' },
+          { field: 'Grup_Adi', header: 'Grup Adı' }
       ];
   }
 
