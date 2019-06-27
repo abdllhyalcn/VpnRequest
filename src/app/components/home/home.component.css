@@ -1,0 +1,12 @@
+.container{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.row{
+    width: 85%;
+}
+
+.dialog{
+    width: 300px;
+}

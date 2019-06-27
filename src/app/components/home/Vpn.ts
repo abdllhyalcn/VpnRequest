@@ -1,4 +1,4 @@
-export interface Car {
+export interface Vpn {
     Kullanici_Adi?;
     Request_ID?;
     Baslangic_Tarihi?;

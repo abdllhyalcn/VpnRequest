@@ -1,9 +1,0 @@
-{
-    "data":[
-        {"Kullanıcı_Adi":"Abdullah","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"İç","Grup_Adi":"TEI_VPN_Ad1"},
-        {"Kullanıcı_Adi":"Ayşe","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"İç","Grup_Adi":"TEI_VPN_Ad2"},
-        {"Kullanıcı_Adi":"Fatma","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"İç","Grup_Adi":"TEI_VPN_Ad2"},
-        {"Kullanıcı_Adi":"Veli","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"Dış","Grup_Adi":"TEI_VPN_Ad3"}
-        
-    ]
-}

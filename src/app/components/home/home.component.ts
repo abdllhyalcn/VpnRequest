@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CarService } from 'src/app/services/car.service';
-import {Car} from './car';
+import { VpnService } from 'src/app/services/vpn.service';
+import {Vpn} from './Vpn';
 
 @Component({
   selector: 'app-home',
@@ -12,23 +12,23 @@ export class HomeComponent implements OnInit {
 
   displayDialog: boolean;
 
-  car: Car = {};
+  vpn: Vpn = {};
 
-  selectedCar: Car;
+  selectedVpn: Vpn;
 
-  newCar: boolean;
+  newVpn: boolean;
 
-  cars: Car[];
+  vpns: Vpn[];
 
   cols: any[];
 
-  constructor(private carService: CarService) { }
+  constructor(private vpnService: VpnService) { }
 
   ngOnInit() {
-      this.carService.getCarsSmall().then(cars => this.cars = cars);
+      this.vpnService.getVpns().then(vpns => this.vpns = vpns);
 
       this.cols = [
-          { field: 'Kullanıcı_Adi', header: 'Kullanıcı Adı' },
+          { field: 'Kullanici_Adi', header: 'Kullanıcı Adı' },
           { field: 'Request_ID', header: 'Request ID' },
           { field: 'Baslangic_Tarihi', header: 'Başlangıç Tarihi' },
           { field: 'Bitis_Tarihi', header: 'Bitiş Tarihi' },
@@ -39,42 +39,42 @@ export class HomeComponent implements OnInit {
   }
 
   showDialogToAdd() {
-      this.newCar = true;
-      this.car = {};
+      this.newVpn = true;
+      this.vpn = {};
       this.displayDialog = true;
   }
 
   save() {
-      let cars = [...this.cars];
-      if (this.newCar)
-          cars.push(this.car);
+      let vpns = [...this.vpns];
+      if (this.newVpn)
+            vpns.push(this.vpn);
       else
-          cars[this.cars.indexOf(this.selectedCar)] = this.car;
+            vpns[this.vpns.indexOf(this.selectedVpn)] = this.vpn;
 
-      this.cars = cars;
-      this.car = null;
+      this.vpns = vpns;
+      this.vpn = null;
       this.displayDialog = false;
   }
 
   delete() {
-      let index = this.cars.indexOf(this.selectedCar);
-      this.cars = this.cars.filter((val, i) => i != index);
-      this.car = null;
+      let index = this.vpns.indexOf(this.selectedVpn);
+      this.vpns = this.vpns.filter((val, i) => i != index);
+      this.vpn = null;
       this.displayDialog = false;
   }
 
   onRowSelect(event) {
-      this.newCar = false;
-      this.car = this.cloneCar(event.data);
+      this.newVpn = false;
+      this.vpn = this.cloneCar(event.data);
       this.displayDialog = true;
   }
 
-  cloneCar(c: Car): Car {
-      let car = {};
+  cloneCar(c: Vpn): Vpn {
+      let vpn = {};
       for (let prop in c) {
-          car[prop] = c[prop];
+            vpn[prop] = c[prop];
       }
-      return car;
+      return vpn;
   }
   
 }
