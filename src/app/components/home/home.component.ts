@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
 
   cols: any[];
 
+  disabled: boolean = false;
+
   constructor(private vpnService: VpnService) { }
 
   ngOnInit() {
@@ -41,17 +43,19 @@ export class HomeComponent implements OnInit {
   showDialogToAdd() {
       this.newVpn = true;
       this.vpn = {};
+      this.dialogDisable(false);
       this.displayDialog = true;
   }
 
   save() {
-      let vpns = [...this.vpns];
+     // let vpns = [...this.vpns];
       if (this.newVpn)
-            vpns.push(this.vpn);
+            this.vpns.push(this.vpn);
+            //should be sent to database
       else
-            vpns[this.vpns.indexOf(this.selectedVpn)] = this.vpn;
+            this.vpns[this.vpns.indexOf(this.selectedVpn)] = this.vpn;
 
-      this.vpns = vpns;
+    //  this.vpns = vpns;
       this.vpn = null;
       this.displayDialog = false;
   }
@@ -65,16 +69,21 @@ export class HomeComponent implements OnInit {
 
   onRowSelect(event) {
       this.newVpn = false;
-      this.vpn = this.cloneCar(event.data);
+      this.vpn = this.cloneVpn(event.data);
+      this.dialogDisable(true);
       this.displayDialog = true;
   }
 
-  cloneCar(c: Vpn): Vpn {
+  cloneVpn(c: Vpn): Vpn {
       let vpn = {};
       for (let prop in c) {
             vpn[prop] = c[prop];
       }
       return vpn;
+  }
+
+  dialogDisable(disable:boolean){
+    this.disabled = disable;
   }
   
 }

@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import {CalendarModule} from 'primeng/calendar';
 
 import { CommonModule } from '@angular/common';
 
@@ -33,6 +34,7 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     TableModule,
     DialogModule,
+    CalendarModule,
     CommonModule
 
   ],
