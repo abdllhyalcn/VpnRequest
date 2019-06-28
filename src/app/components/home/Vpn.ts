@@ -4,6 +4,6 @@ export interface Vpn {
     Baslangic_Tarihi?;
     Bitis_Tarihi?;
     Talep_Acan?;
-    Kullanici?;
+    KullaniciType?;
     Grup_Adi?;
 }

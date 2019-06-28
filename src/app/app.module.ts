@@ -15,6 +15,8 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import {CalendarModule} from 'primeng/calendar';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {PickListModule} from 'primeng/picklist';
 
 import { CommonModule } from '@angular/common';
 
@@ -35,6 +37,8 @@ import { CommonModule } from '@angular/common';
     TableModule,
     DialogModule,
     CalendarModule,
+    SelectButtonModule,
+    PickListModule,
     CommonModule
 
   ],

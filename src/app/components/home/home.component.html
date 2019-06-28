@@ -22,19 +22,19 @@
                         </ng-template>
                         <ng-template pTemplate="summary" let-rowData>
                             <div style="text-align:left">
-                                <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+                                <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Ekle"></button>
                             </div>
                         </ng-template>    
                     </p-table>
                     
-                    <p-dialog [style]="{'width':'600px'}" id="dialog" header="Vpn Detayları" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  >
+                    <p-dialog [style]="{'width':'900px'}" id="dialog" header="Vpn Detayları" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [dismissableMask]="true"  >
                         <div class="ui-g ui-fluid" *ngIf="vpn">
                             <div class="ui-g-12">
                                 <div class="ui-g-4">
                                     <label for="Kullanici_Adi">Kullanıcı Adı</label>
                                 </div>
                                 <div class="ui-g-8">
-                                    <input pInputText id="Kullanici_Adi" [(ngModel)]="vpn.Kullanici_Adi" />
+                                    <input pInputText id="Kullanici_Adi" [(ngModel)]="vpn.Kullanici_Adi" [disabled]="disabled" />
                                 </div>
                             </div>
                             <div class="ui-g-12">
@@ -50,7 +50,7 @@
                                     <label for="Baslangic_Tarihi">Başlangıç Tarihi</label>
                                 </div>
                                 <div class="ui-g-8">
-                                    <input pInputText id="Baslangic_Tarihi" [(ngModel)]="vpn.Baslangic_Tarihi" />
+                                    <p-calendar  dataType="string" dateFormat="dd.mm.yy" [(ngModel)]="vpn.Baslangic_Tarihi" [showIcon]="true"></p-calendar>
                                 </div>
                             </div>
                             <div class="ui-g-12">
@@ -58,7 +58,7 @@
                                     <label for="Bitis_Tarihi">Bitiş Tarihi</label>
                                 </div>
                                 <div class="ui-g-8">
-                                    <input pInputText id="Bitis_Tarihi" [(ngModel)]="vpn.Bitis_Tarihi" />
+                                        <p-calendar  dataType="string" dateFormat="dd.mm.yy" [(ngModel)]="vpn.Bitis_Tarihi" [showIcon]="true"></p-calendar>
                                 </div>
                             </div>
                             <div class="ui-g-12">
@@ -66,15 +66,16 @@
                                     <label for="Talep_Acan">Talep Açan</label>
                                 </div>
                                 <div class="ui-g-8">
-                                    <input pInputText id="Talep_Acan" [(ngModel)]="vpn.Talep_Acan" />
+                                    <input pInputText id="Talep_Acan" [(ngModel)]="vpn.Talep_Acan" [disabled]="disabled"/>
                                 </div>
                             </div>
                             <div class="ui-g-12">
                                 <div class="ui-g-4">
-                                    <label for="Kullanici">Kullanıcı</label>
+                                    <label for="Kullanici">Kullanıcı Tipi</label>
                                 </div>
                                 <div class="ui-g-8">
-                                    <input pInputText id="Kullanici" [(ngModel)]="vpn.Kullanici" />
+                                        <p-selectButton [options]="types" [(ngModel)]="vpn.KullaniciType" [disabled]="disabled"></p-selectButton>
+                                        <!--<p>Selected Type: <span style="font-weight: bold">{{vpn.KullaniciType}} Kullanıcı</span></p>-->
                                 </div>
                             </div>
                             <div class="ui-g-12">
@@ -82,7 +83,15 @@
                                     <label for="Grup_Adi">Grup Adı</label>
                                 </div>
                                 <div class="ui-g-8">
-                                    <input pInputText id="Grup_Adi" [(ngModel)]="vpn.Grup_Adi" />
+                                        <p-pickList [source]="list1" [target]="list2" [showSourceControls]="false" [showTargetControls]="false" [responsive]="true">
+                                                <ng-template let-car pTemplate="item">
+                                                    <div class="ui-helper-clearfix">
+                                                        <img src="assets/showcase/images/demo/car/{{car.brand}}.png" style="display:inline-block;margin:2px 0 2px 2px" width="48">
+                                                        <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{car.brand}} - {{car.year}} - {{car.color}}</div>
+                                                    </div>
+                                                </ng-template>
+                                            </p-pickList>
+                                    <button styleClass="grupTalepButton" pButton type="button" label="Grup Talebi" class="ui-button-raised ui-button-warning"></button>
                                 </div>
                             </div>
                         </div>

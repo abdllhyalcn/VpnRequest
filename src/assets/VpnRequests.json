@@ -1,9 +1,9 @@
 {
     "data":[
-        {"Kullanici_Adi":"Abdullah","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"İç","Grup_Adi":"TEI_VPN_Ad1"},
-        {"Kullanici_Adi":"Ayşe","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"İç","Grup_Adi":"TEI_VPN_Ad2"},
-        {"Kullanici_Adi":"Fatma","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"İç","Grup_Adi":"TEI_VPN_Ad2"},
-        {"Kullanici_Adi":"Veli","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","Kullanici":"Dış","Grup_Adi":"TEI_VPN_Ad3"}
+        {"Kullanici_Adi":"Abdullah","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","KullaniciType":"İç","Grup_Adi":"TEI_VPN_Ad1"},
+        {"Kullanici_Adi":"Ayşe","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","KullaniciType":"İç","Grup_Adi":"TEI_VPN_Ad2"},
+        {"Kullanici_Adi":"Fatma","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","KullaniciType":"İç","Grup_Adi":"TEI_VPN_Ad2"},
+        {"Kullanici_Adi":"Veli","Request_ID":"aa1","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":"Ali","KullaniciType":"Dış","Grup_Adi":"TEI_VPN_Ad3"}
         
     ]
 }

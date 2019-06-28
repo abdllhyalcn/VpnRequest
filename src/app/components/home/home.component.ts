@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { VpnService } from 'src/app/services/vpn.service';
 import {Vpn} from './Vpn';
+import { SelectItem } from 'primeng/components/common/selectitem';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,15 @@ export class HomeComponent implements OnInit {
 
   disabled: boolean = false;
 
+  types: SelectItem[]=[
+    {label:'İç', value:'İç'},
+    {label:'Dış', value:'Dış'}
+];
+
+  list1: any[];
+    
+  list2: any[];
+
   constructor(private vpnService: VpnService) { }
 
   ngOnInit() {
@@ -35,14 +45,14 @@ export class HomeComponent implements OnInit {
           { field: 'Baslangic_Tarihi', header: 'Başlangıç Tarihi' },
           { field: 'Bitis_Tarihi', header: 'Bitiş Tarihi' },
           { field: 'Talep_Acan', header: 'Talep Açan' },
-          { field: 'Kullanici', header: 'Kullanıcı' },
+          { field: 'KullaniciType', header: 'Kullanıcı Tipi' },
           { field: 'Grup_Adi', header: 'Grup Adı' }
       ];
   }
 
   showDialogToAdd() {
       this.newVpn = true;
-      this.vpn = {};
+      this.vpn = {"Grup_Adi":"TEI_VPN_"};
       this.dialogDisable(false);
       this.displayDialog = true;
   }
