@@ -15,5 +15,5 @@ export class VpnService {
                 .toPromise()
                 .then(res => <Vpn[]> res.data)
                 .then(data => { return data; });
-}
+  }
 }

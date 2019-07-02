@@ -17,6 +17,8 @@ import { DialogModule } from 'primeng/dialog';
 import {CalendarModule} from 'primeng/calendar';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PickListModule} from 'primeng/picklist';
+import {CardModule} from 'primeng/card';
+import {CheckboxModule} from 'primeng/checkbox';
 
 import { CommonModule } from '@angular/common';
 
@@ -39,6 +41,8 @@ import { CommonModule } from '@angular/common';
     CalendarModule,
     SelectButtonModule,
     PickListModule,
+    CardModule,
+    CheckboxModule,
     CommonModule
 
   ],

@@ -5,5 +5,5 @@ export interface Vpn {
     Bitis_Tarihi?;
     Talep_Acan?;
     KullaniciType?;
-    Grup_Adi?;
+    Grup_Adi:any[];
 }

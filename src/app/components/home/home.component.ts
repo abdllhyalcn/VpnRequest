@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   displayDialog: boolean;
 
-  vpn: Vpn = {};
+  vpn: Vpn = {Grup_Adi:[]};
 
   selectedVpn: Vpn;
 
@@ -23,16 +23,18 @@ export class HomeComponent implements OnInit {
 
   cols: any[];
 
-  disabled: boolean = false;
+  selectedValues: boolean[];
+
+  disabledColumns: boolean = false;
 
   types: SelectItem[]=[
     {label:'İç', value:'İç'},
     {label:'Dış', value:'Dış'}
-];
+  ];
 
-  list1: any[];
-    
-  list2: any[];
+  sourceVpnGroup: string[];
+
+  vpnGrupVisible:boolean=true;
 
   constructor(private vpnService: VpnService) { }
 
@@ -52,8 +54,7 @@ export class HomeComponent implements OnInit {
 
   showDialogToAdd() {
       this.newVpn = true;
-      this.vpn = {"Grup_Adi":"TEI_VPN_"};
-      this.dialogDisable(false);
+      this.vpn = {Grup_Adi:[]};
       this.displayDialog = true;
   }
 
@@ -80,21 +81,34 @@ export class HomeComponent implements OnInit {
   onRowSelect(event) {
       this.newVpn = false;
       this.vpn = this.cloneVpn(event.data);
-      this.dialogDisable(true);
       this.displayDialog = true;
   }
 
   cloneVpn(c: Vpn): Vpn {
-      let vpn = {};
+      let vpn = {Grup_Adi:[]};
       for (let prop in c) {
             vpn[prop] = c[prop];
       }
       return vpn;
   }
 
-  dialogDisable(disable:boolean){
-    this.disabled = disable;
+  onDialogShow(){
+    this.disabledColumns=!this.newVpn;
+    //sourceVpnGroup will be taken from a dataset.
+    this.sourceVpnGroup=['TEI_VPN_Ad1','TEI_VPN_Ad2','TEI_VPN_Ad3'];
+    this.sourceVpnGroup = this.sourceVpnGroup.filter(item => this.vpn.Grup_Adi.indexOf(item) < 0);
   }
+
+  onDialogHide(){
+    this.vpnGrupVisible=true;
+  }
+
+  gTalepClick(){
+    this.vpnGrupVisible=!this.vpnGrupVisible;
+    this.selectedValues=[];
+  }
+
   
-}
+  
+} 
 
