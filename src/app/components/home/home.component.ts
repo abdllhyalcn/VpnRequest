@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { VpnService } from 'src/app/services/vpn.service';
-import {Vpn} from './Vpn';
+import {Vpn, Username} from './Vpn';
 import { SelectItem } from 'primeng/components/common/selectitem';
+import { UsernameService } from 'src/app/services/username.service';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,11 @@ export class HomeComponent implements OnInit {
 
   vpnGrupVisible:boolean=true;
 
-  constructor(private vpnService: VpnService) { }
+  username:Username;
+
+
+  constructor(private vpnService: VpnService,
+              private usernameService: UsernameService) { }
 
   ngOnInit() {
       this.vpnService.getVpns().then(vpns => this.vpns = vpns);
@@ -60,9 +65,10 @@ export class HomeComponent implements OnInit {
 
   save() {
      // let vpns = [...this.vpns];
-      if (this.newVpn)
+      if (this.newVpn){
             this.vpns.push(this.vpn);
             //should be sent to database
+      }
       else
             this.vpns[this.vpns.indexOf(this.selectedVpn)] = this.vpn;
 
@@ -109,6 +115,39 @@ export class HomeComponent implements OnInit {
   }
 
   
-  
+  filteredUsernames:Username[];
+
+  filterUsernameSingle(event) {
+    let query = event.query;
+    this.usernameService.getUsernames().then(usernames => {
+        this.filteredUsernames = this.filterUsername(query, usernames);
+    });
+}
+
+  filterUsername(query, usernames: any[]):any[] {
+    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered : any[] = [];
+    for(let i = 0; i < usernames.length; i++) {
+        let username = usernames[i];
+        if(username.code.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(username);
+        }
+    }
+    if(filtered.length==0){
+      filtered.push({"nameusername": "Kullanıcı Adı Ekleyiniz", "code": "nwusr"});
+      console.log("asdasd")
+    }
+    return filtered;
+  }
+
+  newUsername(value){
+    console.log(value);
+    if(value.code=="nwusr"){
+      console.log("here");
+    }
+    
+  }
+
+
 } 
 

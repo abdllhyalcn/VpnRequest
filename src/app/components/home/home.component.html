@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-6">
-                <p-table [columns]="cols" [value]="vpns" selectionMode="single" [(selection)]="selectedVpn" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+            <p-table [columns]="cols" [value]="vpns" selectionMode="single" [(selection)]="selectedVpn" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
                         <ng-template pTemplate="caption">
                             Vpn İstekleri
                         </ng-template>
@@ -25,77 +25,68 @@
                                 <button pButton type="button" (click)="showDialogToAdd()" label="Add" class="ui-button-raised"></button>
                             </div>
                         </ng-template>    
-                    </p-table>
+            </p-table>
                     
-                    <p-dialog [style]="{'width':'600px'}" id="dialog" header="Vpn Detayları" (onShow)="onDialogShow()" (onHide)="onDialogHide()" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [dismissableMask]="true"  >
-                        <div class="ui-g ui-fluid" *ngIf="vpn">
-                            <div class="ui-g-12">
-                                <div class="ui-g-6">
-                                    <label for="Kullanici_Adi">Kullanıcı Adı</label>
-                                    <input pInputText id="Kullanici_Adi" [(ngModel)]="vpn.Kullanici_Adi" [disabled]="disabledColumns" />
-                                </div>
-                                <div class="ui-g-6">
-                                    <label for="Request_ID">Request ID</label>
-                                    <input pInputText id="Request_ID" [(ngModel)]="vpn.Request_ID" [disabled]="disabledColumns" />
-                                </div>
-                            </div>
-                            
-                            <div class="ui-g-12">
-                                <div class="ui-g-6">
-                                    <label for="Baslangic_Tarihi">Başlangıç Tarihi</label>
-                                    <p-calendar  dataType="string"  dateFormat="dd.mm.yy" [(ngModel)]="vpn.Baslangic_Tarihi" [showIcon]="true"></p-calendar>
-                                    <!--<p-calendar [(ngModel)]="rangeDates" maxDate="" selectionMode="range" dataType="string"  dateFormat="dd.mm.yy" [showIcon]="true" [readonlyInput]="true"></p-calendar>-->
-                                </div>
-                                <div class="ui-g-6">
-                                    <label for="Bitis_Tarihi">Bitiş Tarihi</label>
-                                    <p-calendar  dataType="string" dateFormat="dd.mm.yy" [(ngModel)]="vpn.Bitis_Tarihi" [showIcon]="true"></p-calendar>
-                                </div>
-                            </div>
-                            <div class="ui-g-12">
-                                <div class="ui-g-6">
-                                    <label for="Talep_Acan">Talep Açan</label>
-                                    <input pInputText id="Talep_Acan" [(ngModel)]="vpn.Talep_Acan" [disabled]="disabledColumns"/>
-                                </div>
-                                <div class="ui-g-6">
-                                    <label for="Kullanici">Kullanıcı Tipi</label>
-                                    <p-selectButton [options]="types" [(ngModel)]="vpn.KullaniciType" [disabled]="disabledColumns"></p-selectButton>
-                                </div>
-                            </div>
-                            <div class="ui-g-12">
-                                <div class="ui-g-9" *ngIf="vpnGrupVisible">
-                                    
-                                    <p-pickList  [source]="sourceVpnGroup" [target]="vpn.Grup_Adi" sourceHeader="Mevcut Grup" targetHeader="Seçili Grup" dragdrop="true" [showSourceControls]="false" [showTargetControls]="false" [responsive]="true">
-                                        <ng-template let-list pTemplate="item">
-                                            <div class="ui-helper-clearfix">
-                                                <div style="font-size:14px;float:left;margin:0px 0px 0 0">{{list}}</div>
-                                            </div>
-                                        </ng-template>
-                                    </p-pickList>
+            <p-dialog [style]="{'width':'70%'}" id="dialog" header="Vpn Detayları" (onShow)="onDialogShow()" (onHide)="onDialogHide()" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [dismissableMask]="true"  >
+                <div class="ui-g ui-fluid" *ngIf="vpn">
 
-                                </div>
-
-                                <div class="ui-g-9" *ngIf="!vpnGrupVisible">
-                                        <p-card header="VPN Grup Talebi" [style]="{width: '360px'}" styleClass="ui-card-shadow">
-                                                <div class="ui-g-12"><p-checkbox name="group1" value="firewall" label="Firewall Talebi" [(ngModel)]="selectedValues" inputId="ny"></p-checkbox></div>
-                                                <div class="ui-g-12"><p-checkbox name="group1" value="vpnClient" label="VPN Client Gerekli" [(ngModel)]="selectedValues" inputId="sf"></p-checkbox></div>
-                                                <p-footer>
-                                                    <button pButton type="button" label="Send" class="ui-button-raised"></button>
-                                                    <button pButton type="button" (click)="gTalepClick()" label="Close" class="ui-button-raised ui-button-secondary"></button>
-                                                </p-footer>
-                                            </p-card>
-                                </div>
-                                <div class="ui-g-3">
-                                        <button pButton type="button" (click)="gTalepClick()" label="Grup Talebi" class="ui-button-raised ui-button-warning"></button>
-                                </div>
-                            </div>
+                    <div class="ui-g-7 ui-g-nopad">
+                        <div class="ui-g-6">
+                            <label for="Kullanici_Adi">Kullanıcı Adı</label>      
+                            <p-autoComplete [(ngModel)]="vpn.Kullanici_Adi" [suggestions]="filteredUsernames" (completeMethod)="filterUsernameSingle($event)" (onSelect)="newUsername($event)" field="namesurname" [size]="30"
+                                [minLength]="3">
+                            </p-autoComplete>
+                        
+                        
+                        
+                        
                         </div>
-                        <p-footer>
-                            <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                                <button pButton type="button" icon="pi pi-times" (click)="delete()" label="Delete" class="ui-button-raised ui-button-danger"></button>
-                                <button pButton type="button" icon="pi pi-check" (click)="save()" label="Save" class="ui-button-raised"></button>
-                            </div>
-                        </p-footer>
-                    </p-dialog>
+                        <div class="ui-g-6">
+                            <label for="Request_ID">Request ID</label>
+                            <input pInputText id="Request_ID" [(ngModel)]="vpn.Request_ID" [disabled]="disabledColumns" />                                </div>
+                        <div class="ui-g-6">
+                            <label for="Baslangic_Tarihi">Başlangıç Tarihi</label>
+                            <p-calendar  dataType="string"  dateFormat="dd.mm.yy" [(ngModel)]="vpn.Baslangic_Tarihi" [showIcon]="true" readonlyInput="true" ></p-calendar>
+                            <!--<p-calendar [(ngModel)]="rangeDates" maxDate="" selectionMode="range" dataType="string"  dateFormat="dd.mm.yy" [showIcon]="true" [readonlyInput]="true"></p-calendar>-->                                </div>
+                        <div class="ui-g-6">
+                            <label for="Bitis_Tarihi">Bitiş Tarihi</label>                                <p-calendar  dataType="string" dateFormat="dd.mm.yy" [(ngModel)]="vpn.Bitis_Tarihi" [showIcon]="true"></p-calendar>
+                        </div>
+                        <div class="ui-g-6">
+                           <label for="Talep_Acan">Talep Açan</label>
+                           <input pInputText id="Talep_Acan" [(ngModel)]="vpn.Talep_Acan" [disabled]="disabledColumns"/>    
+                        </div>
+                        <div class="ui-g-6">
+                            <label for="Kullanici">Kullanıcı Tipi</label>
+                            <p-selectButton [options]="types" [(ngModel)]="vpn.KullaniciType" [disabled]="disabledColumns"></p-selectButton>    
+                        </div>
+                        <div class="ui-g-12">
+                            <p-pickList  [source]="sourceVpnGroup" [target]="vpn.Grup_Adi" sourceHeader="Mevcut Grup" targetHeader="Seçili Grup" dragdrop="true" [showSourceControls]="false" [showTargetControls]="false" [responsive]="true">
+                                    <ng-template let-list pTemplate="item">
+                                        <div class="ui-helper-clearfix">
+                                            <div style="font-size:14px;float:left;margin:0px 0px 0 0">{{list}}</div>
+                                        </div>
+                                    </ng-template>
+                            </p-pickList>
+                        </div>
+                    </div>
+                    <div class="ui-g-5">
+                        <p-card header="VPN Grup Talebi" [style]="{width: '100%'}" styleClass="ui-card-shadow">
+                            <div class="ui-g-12"><p-checkbox name="group1" value="firewall" label="Firewall Talebi" [(ngModel)]="selectedValues" inputId="ny"></p-checkbox></div>
+                            <div class="ui-g-12"><p-checkbox name="group1" value="vpnClient" label="VPN Client Gerekli" [(ngModel)]="selectedValues" inputId="sf"></p-checkbox></div>
+                            <p-footer>
+                                <button pButton type="button" label="Send" class="ui-button-raised ui-button-warning"></button>
+                            </p-footer>
+                        </p-card>
+                    </div>
+
+                </div>
+                <p-footer>
+                    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                        <button pButton type="button" icon="pi pi-times" (click)="delete()" label="Delete" class="ui-button-raised ui-button-danger"></button>
+                        <button pButton type="button" icon="pi pi-check" (click)="save()" label="Save" class="ui-button-raised"></button>
+                    </div>
+                </p-footer>
+            </p-dialog>
         </div>
     </div>
 </div>

@@ -16,4 +16,8 @@ export class VpnService {
                 .then(res => <Vpn[]> res.data)
                 .then(data => { return data; });
   }
+
+  insertVpn(vpn:Vpn){
+   
+  }
 }

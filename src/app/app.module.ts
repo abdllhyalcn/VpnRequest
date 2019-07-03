@@ -19,6 +19,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {PickListModule} from 'primeng/picklist';
 import {CardModule} from 'primeng/card';
 import {CheckboxModule} from 'primeng/checkbox';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import { CommonModule } from '@angular/common';
 
@@ -43,6 +44,7 @@ import { CommonModule } from '@angular/common';
     PickListModule,
     CardModule,
     CheckboxModule,
+    AutoCompleteModule,
     CommonModule
 
   ],
