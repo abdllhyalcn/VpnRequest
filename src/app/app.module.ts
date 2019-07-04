@@ -23,6 +23,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 import { CommonModule } from '@angular/common';
+import { UsernameService } from './services/username.service';
+import { VpnService } from './services/vpn.service';
 
 
 @NgModule({
@@ -50,7 +52,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
 
   ],
-  providers: [],
+  providers: [UsernameService,VpnService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
