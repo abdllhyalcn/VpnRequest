@@ -20,6 +20,7 @@ import {PickListModule} from 'primeng/picklist';
 import {CardModule} from 'primeng/card';
 import {CheckboxModule} from 'primeng/checkbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 import { CommonModule } from '@angular/common';
 
@@ -45,6 +46,7 @@ import { CommonModule } from '@angular/common';
     CardModule,
     CheckboxModule,
     AutoCompleteModule,
+    OverlayPanelModule,
     CommonModule
 
   ],

@@ -1,22 +1,33 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-6">
-            <p-table [columns]="cols" [value]="vpns" selectionMode="single" [(selection)]="selectedVpn" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+            <p-table #dt1 [columns]="cols" [value]="vpns" selectionMode="single" [(selection)]="selectedVpn" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
                         <ng-template pTemplate="caption">
                             Vpn İstekleri
                         </ng-template>
                         <ng-template pTemplate="header" let-columns>
-                            <tr>
-                                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                                    {{col.header}}
-                                    <p-sortIcon [field]="col.field"></p-sortIcon>
-                                </th>
-                            </tr>
+                                <tr>
+                                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th *ngFor="let col of columns" [ngSwitch]="col.field" class="ui-fluid">
+                                        <input pInputText type="text" (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" [value]="dt1.filters[col.field]?.value">
+                                    </th>
+                                </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr [pSelectableRow]="rowData">
                                 <td *ngFor="let col of columns">
-                                    {{rowData[col.field]}}
+                                        <div *ngIf="col.subfield;then nested_object_content else normal_content"></div>
+                                        <ng-template #nested_object_content>
+                                          {{rowData[col.field][col.subfield]}}
+                                        </ng-template>
+                                        <ng-template #normal_content>
+                                          {{rowData[col.field]}}
+                                        </ng-template>
                                 </td>
                             </tr>
                         </ng-template>
@@ -27,33 +38,34 @@
                         </ng-template>    
             </p-table>
                     
-            <p-dialog [style]="{'width':'70%'}" id="dialog" header="Vpn Detayları" (onShow)="onDialogShow()" (onHide)="onDialogHide()" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [dismissableMask]="true"  >
+            <p-dialog [style]="{'width':'70%'}" id="dialog" header="Vpn Detayları" (onShow)="onDialogShow()" (onHide)="this.vpn={Kullanici_Adi:{}, Talep_Acan:{} , Grup_Adi:[]} ;" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [dismissableMask]="true"  >
                 <div class="ui-g ui-fluid" *ngIf="vpn">
 
                     <div class="ui-g-7 ui-g-nopad">
                         <div class="ui-g-6">
                             <label for="Kullanici_Adi">Kullanıcı Adı</label>      
-                            <p-autoComplete [(ngModel)]="vpn.Kullanici_Adi" [suggestions]="filteredUsernames" (completeMethod)="filterUsernameSingle($event)" (onSelect)="newUsername($event)" field="namesurname" [size]="30"
+                            <p-autoComplete [(ngModel)]="vpn.Kullanici_Adi" [suggestions]="filteredUsernames" (completeMethod)="filterUsernameSingle($event)" (onSelect)="autoConSelect($event)" [forceSelection]="true" field="userNameSurname" [disabled]="disabledColumns" [size]="30"
                                 [minLength]="3">
-                            </p-autoComplete>
-                        
-                        
-                        
-                        
+                        </p-autoComplete>
                         </div>
                         <div class="ui-g-6">
                             <label for="Request_ID">Request ID</label>
-                            <input pInputText id="Request_ID" [(ngModel)]="vpn.Request_ID" [disabled]="disabledColumns" />                                </div>
+                            <input pInputText id="Request_ID" [(ngModel)]="vpn.Request_ID" [disabled]="disabledColumns" />                                
+                        </div>
                         <div class="ui-g-6">
                             <label for="Baslangic_Tarihi">Başlangıç Tarihi</label>
                             <p-calendar  dataType="string"  dateFormat="dd.mm.yy" [(ngModel)]="vpn.Baslangic_Tarihi" [showIcon]="true" readonlyInput="true" ></p-calendar>
-                            <!--<p-calendar [(ngModel)]="rangeDates" maxDate="" selectionMode="range" dataType="string"  dateFormat="dd.mm.yy" [showIcon]="true" [readonlyInput]="true"></p-calendar>-->                                </div>
+                            <!--<p-calendar [(ngModel)]="rangeDates" maxDate="" selectionMode="range" dataType="string"  dateFormat="dd.mm.yy" [showIcon]="true" [readonlyInput]="true"></p-calendar>-->                                
+                        </div>
                         <div class="ui-g-6">
-                            <label for="Bitis_Tarihi">Bitiş Tarihi</label>                                <p-calendar  dataType="string" dateFormat="dd.mm.yy" [(ngModel)]="vpn.Bitis_Tarihi" [showIcon]="true"></p-calendar>
+                            <label for="Bitis_Tarihi">Bitiş Tarihi</label>                                
+                            <p-calendar  dataType="string"  maxDate="" dateFormat="dd.mm.yy" [(ngModel)]="vpn.Bitis_Tarihi" [showIcon]="true"></p-calendar>
                         </div>
                         <div class="ui-g-6">
                            <label for="Talep_Acan">Talep Açan</label>
-                           <input pInputText id="Talep_Acan" [(ngModel)]="vpn.Talep_Acan" [disabled]="disabledColumns"/>    
+                           <p-autoComplete [(ngModel)]="vpn.Talep_Acan" [suggestions]="filteredUsernames" (completeMethod)="filterUsernameSingle($event)" (onSelect)="autoConSelect($event)" field="userNameSurname" [forceSelection]="true" [disabled]="disabledColumns" [size]="30"
+                                [minLength]="3">
+                            </p-autoComplete>
                         </div>
                         <div class="ui-g-6">
                             <label for="Kullanici">Kullanıcı Tipi</label>
@@ -70,7 +82,7 @@
                         </div>
                     </div>
                     <div class="ui-g-5">
-                        <p-card header="VPN Grup Talebi" [style]="{width: '100%'}" styleClass="ui-card-shadow">
+                        <p-card header="Vpn Grup Talebi" [style]="{width: '100%'}" styleClass="ui-card-shadow">
                             <div class="ui-g-12"><p-checkbox name="group1" value="firewall" label="Firewall Talebi" [(ngModel)]="selectedValues" inputId="ny"></p-checkbox></div>
                             <div class="ui-g-12"><p-checkbox name="group1" value="vpnClient" label="VPN Client Gerekli" [(ngModel)]="selectedValues" inputId="sf"></p-checkbox></div>
                             <p-footer>
@@ -82,11 +94,46 @@
                 </div>
                 <p-footer>
                     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                        <button pButton type="button" icon="pi pi-times" (click)="delete()" label="Delete" class="ui-button-raised ui-button-danger"></button>
-                        <button pButton type="button" icon="pi pi-check" (click)="save()" label="Save" class="ui-button-raised"></button>
+                        <!--<button pButton type="button" icon="pi pi-times" (click)="delete()" label="Delete" class="ui-button-raised ui-button-danger"></button>-->
+                        <button pButton type="button" icon="pi pi-check" (click)="save()" label="Save" class="ui-button-raised ui-button-success"></button>
                     </div>
                 </p-footer>
+            
+            
+            
+            
+            
+            
+            
+            
             </p-dialog>
+            
+            <p-dialog [style]="{'width':'40%'}" id="dialog" header="New Username" [(visible)]="displayNewUserDialog" (onHide)="this.newUsername={};" [responsive]="true" showEffect="" [modal]="true" [dismissableMask]="true"  >
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12">
+                        <div class="ui-g-3">
+                            <label >Name Surname</label>
+                        </div>
+                        <div class="ui-g-5">
+                            <input pInputText id="userNameSurname" [(ngModel)]="newUsername.userNameSurname" />
+                        </div>
+                    </div>
+                    <div class="ui-g-12">
+                        <div class="ui-g-3">
+                            <label >User Code</label>
+                        </div>
+                        <div class="ui-g-5">
+                            <input pInputText id="code" [(ngModel)]="newUsername.code" />
+                        </div>
+                    </div>
+                </div>
+                <p-footer>
+                    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                        <button pButton type="button" icon="pi pi-check" (click)="saveUsername()" label="Save" class="ui-button-raised"></button>
+                    </div>
+                    </p-footer>
+            </p-dialog>
+
         </div>
     </div>
 </div>

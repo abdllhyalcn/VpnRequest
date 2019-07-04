@@ -5,7 +5,7 @@ export interface Vpn {
     Bitis_Tarihi?;
     Talep_Acan?;
     KullaniciType?;
-    Grup_Adi?:any[];
+    Grup_Adi?:string[];
 }
 export interface Username{
     userNameSurname?;
