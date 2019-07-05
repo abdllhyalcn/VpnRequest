@@ -25,6 +25,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { CommonModule } from '@angular/common';
 import { UsernameService } from './services/username.service';
 import { VpnService } from './services/vpn.service';
+import { VpngroupService } from './services/vpngroup.service';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { VpnService } from './services/vpn.service';
     CommonModule
 
   ],
-  providers: [UsernameService,VpnService],
+  providers: [UsernameService,VpnService,VpngroupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

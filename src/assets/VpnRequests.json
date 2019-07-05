@@ -4,6 +4,5 @@
         {"Kullanici_Adi":{"userNameSurname":"Ayşe Ketenci","code":"aysk"},"Request_ID":"aa2","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":{"userNameSurname":"Fatih Sayan","code":"fths"},"KullaniciType":"İç","Grup_Adi":["TEI_VPN_Ad2"]},
         {"Kullanici_Adi":{"userNameSurname":"Fatma Salar","code":"ftms"},"Request_ID":"aa3","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":{"userNameSurname":"Mehmet Ekinci","code":"mhme"},"KullaniciType":"İç","Grup_Adi":["TEI_VPN_Ad2"]},
         {"Kullanici_Adi":{"userNameSurname":"Mehmet Ekinci","code":"mhme"},"Request_ID":"aa4","Baslangic_Tarihi":"26.06.2019","Bitis_Tarihi":"27.06.2019","Talep_Acan":{"userNameSurname":"Fatih Sayan","code":"fths"},"KullaniciType":"Dış","Grup_Adi":["TEI_VPN_Ad3"]}
-        ],
-    "VpnGroups":[{"Grup_Adi":"TEI_VPN_Ad1"},{"Grup_Adi":"TEI_VPN_Ad2"},{"Grup_Adi":"TEI_VPN_Ad3"}]
+        ]
 }

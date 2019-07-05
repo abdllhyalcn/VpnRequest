@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 
 import { VpnService } from 'src/app/services/vpn.service';
-import {Vpn, Username} from './Vpn';
+import {Vpn, Username, VpnGroup} from './Vpn';
 import { SelectItem } from 'primeng/components/common/selectitem';
 import { UsernameService } from 'src/app/services/username.service';
+import { VpngroupService } from 'src/app/services/vpngroup.service';
 
 @Component({
   selector: 'app-home',
@@ -37,7 +38,8 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private vpnService: VpnService,
-              private usernameService: UsernameService) { }
+              private usernameService: UsernameService,
+              private vpgnGroupService:VpngroupService) { }
 
   ngOnInit() {
       this.vpnService.getVpns().then(vpns => this.vpns = vpns);
@@ -97,7 +99,8 @@ export class HomeComponent implements OnInit {
     this.disabledColumns=!this.newVpn;
     this.selectedValues=null;
     //sourceVpnGroup will be taken from a dataset.
-    this.sourceVpnGroup=['TEI_VPN_Ad1','TEI_VPN_Ad2','TEI_VPN_Ad3'];
+    this.sourceVpnGroup=["TEI_VPN_Ad1","TEI_VPN_Ad2","TEI_VPN_Ad3"]
+    //this.vpgnGroupService.getVpnGroups().then(sourceVpnGroup => this.sourceVpnGroup = sourceVpnGroup);
     this.sourceVpnGroup = this.sourceVpnGroup.filter(item => this.vpn.Grup_Adi.indexOf(item) < 0);
   }
   
@@ -121,7 +124,6 @@ export class HomeComponent implements OnInit {
     }
     if(filtered.length==0){
       filtered.push({"userNameSurname": "Kullanıcı Adı Ekleyiniz", "code": "nwusr"});
-      console.log("asdasd")
     }
     return filtered;
   }
@@ -130,6 +132,8 @@ export class HomeComponent implements OnInit {
 
   autoConSelect(value){
     if(value.code=="nwusr"){
+      //"Kullanici Adi Ekleyiniz" value is still on the AutoComplete Component. that must be clean.
+      
       this.displayNewUserDialog=!this.displayNewUserDialog;
     }
   }
@@ -139,6 +143,7 @@ export class HomeComponent implements OnInit {
   saveUsername(username:Username){
     //this will be completed.
     this.newUsername={};
+    this.displayNewUserDialog=!this.displayNewUserDialog;
 
   }
 
